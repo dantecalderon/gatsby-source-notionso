@@ -1,5 +1,6 @@
 import * as _ from 'lodash';
 import { Json, NotionPageText, NotionPageBlock } from '../../types/notion';
+import isUrl from 'is-url';
 
 export type NotionTextAttributes = string[][];
 
@@ -27,6 +28,13 @@ function parseNotionText(text: NotionText): NotionPageText[] {
     result.push(item);
   });
   return result;
+}
+
+function parseCoverUrl(postCover: string): string {
+  if (isUrl(postCover)) {
+    return postCover;
+  }
+  return `https://www.notion.so${postCover}`;
 }
 
 function recordToBlock(value: Json): NotionPageBlock | null {
@@ -60,11 +68,7 @@ function recordToBlock(value: Json): NotionPageBlock | null {
   if (_.get(value, 'format.page_cover')) {
     block.attributes.push({
       att: 'pageCover',
-      value: `https://www.notion.so${_.get(
-        value as object,
-        'format.page_cover',
-        '',
-      )}`,
+      value: parseCoverUrl(_.get(value as object, 'format.page_cover', '')),
     });
   }
   if (block.type === 'page') {

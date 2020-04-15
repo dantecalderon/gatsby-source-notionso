@@ -60,7 +60,11 @@ function recordToBlock(value: Json): NotionPageBlock | null {
   if (_.get(value, 'format.page_cover')) {
     block.attributes.push({
       att: 'pageCover',
-      value: _.get(value as object, 'format.page_cover', ''),
+      value: `https://www.notion.so${_.get(
+        value as object,
+        'format.page_cover',
+        '',
+      )}`,
     });
   }
   if (block.type === 'page') {

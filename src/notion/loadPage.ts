@@ -115,6 +115,7 @@ export default async function loadPage(
     isDraft: !!meta.isDraft,
     excerpt: meta.excerpt || '',
     pageIcon: getAttributeAsString(page, 'pageIcon', ''),
+    pageCover: getAttributeAsString(page, 'pageCover', ''),
     blocks: [],
     images: imageDescriptions,
     linkedPages,

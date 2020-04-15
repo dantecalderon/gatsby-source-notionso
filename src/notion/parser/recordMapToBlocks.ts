@@ -57,6 +57,12 @@ function recordToBlock(value: Json): NotionPageBlock | null {
       value: _.get(value as object, 'format.block_aspect_ratio', '-1'),
     });
   }
+  if (_.get(value, 'format.page_cover')) {
+    block.attributes.push({
+      att: 'pageCover',
+      value: _.get(value as object, 'format.page_cover', ''),
+    });
+  }
   if (block.type === 'page') {
     block.attributes.push({
       att: 'pageIcon',

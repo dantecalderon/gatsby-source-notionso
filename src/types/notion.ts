@@ -57,6 +57,7 @@ export interface NotionPageDescription {
   slug: string;
   excerpt: string;
   pageIcon: string;
+  pageCover: string;
   createdAt: string;
   tags: string[];
   isDraft: boolean;
